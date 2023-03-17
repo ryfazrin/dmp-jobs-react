@@ -9,6 +9,7 @@ import {
 import Home from './pages/Home';
 import LoginPage from './pages/Login';
 import parseJwt from './helpers/parserJwt';
+import JobDetail from './pages/JobDetail';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/jobs/:id",
+    element: <JobDetail />,
   },
 ]);
 
@@ -29,7 +34,7 @@ function App() {
   return (
     <>
       <header>
-        <p>{username}</p>
+        <p>Logged: {username}</p>
       </header>
       <main>
         <RouterProvider router={router} />
