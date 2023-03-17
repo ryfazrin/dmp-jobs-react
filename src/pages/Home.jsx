@@ -92,8 +92,9 @@ const Home = () => {
         return (
           <div key={job.id}>
             <Link to={'/jobs/' + job.id}>
-              <b>{i}. {job.company}</b>
+              <b>{i}. {job.title}</b>
             </Link>
+            <p>{job.company}</p>
             <p>{job.location}</p>
           </div>
         )
