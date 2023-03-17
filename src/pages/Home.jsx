@@ -4,6 +4,7 @@ import withAuth from '../helpers/withAuth';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [jobs, setJobs] = useState([]);
@@ -90,7 +91,9 @@ const Home = () => {
 
         return (
           <div key={job.id}>
-            <b>{i}. {job.company}</b>
+            <Link to={'/jobs/' + job.id}>
+              <b>{i}. {job.company}</b>
+            </Link>
             <p>{job.location}</p>
           </div>
         )
