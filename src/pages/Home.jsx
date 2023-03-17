@@ -8,6 +8,12 @@ import { useEffect } from 'react';
 const Home = () => {
   const [jobs, setJobs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [showPages, setShowPages] = useState(true);
+
+  // State for search
+  const [description, setDescription] = useState('');
+  const [location, setLocation] = useState('');
+  const [fullTime, setFullTime] = useState(false);
 
   const token = localStorage.getItem('token');
 
@@ -20,7 +26,6 @@ const Home = () => {
       });
 
       setJobs(response.data);
-      console.log(response.data);
     }
 
     fetchData();
@@ -34,28 +39,74 @@ const Home = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
+  // handle search
+  const handleSearch = () => {
+    const type = fullTime ? 'Full Time' : ''
+
+    const fetchData = async () => {
+      const response = await axios.get(`http://localhost:5000/api/jobs?description=${description}&location=${location}&type=${type}`, {
+        headers: {
+          'my-secret-key': token //the token is a variable which holds the token
+        }
+      });
+
+      setJobs(response.data);
+    }
+
+    fetchData();
+
+    // if param null, get all data & show pages
+    if (description == '' && location == '' && !fullTime) {
+      setShowPages(true);
+      return
+    }
+
+    setShowPages(false);
+  };
+
   return (
     <div>
+      <div>
+        <h1>Search</h1>
+        <label>
+          Job Description:
+          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
+        </label>
+        <label>
+          Location:
+          <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
+        </label>
+        <label>
+          <input type="checkbox" value={fullTime} onChange={(e) => setFullTime(e.target.value)} />
+          full Time
+        </label>
+        <button onClick={handleSearch}>Search</button>
+      </div>
       <h1>Home</h1>
-      {jobs.map(job => {
+      {jobs.map((job, i) => {
         if (!job) {
           return
         }
 
         return (
-          <div key={job.id}>{job.company}</div>
+          <div key={job.id}>
+            <b>{i}. {job.company}</b>
+            <p>{job.location}</p>
+          </div>
         )
       })
       }
-      <div>
-        <button disabled={currentPage === 1} onClick={handlePrevPage}>
-          Previous
-        </button>
-        <span>Page {currentPage}</span>
-        <button disabled={currentPage === 2} onClick={handleNextPage}>
-          Next
-        </button>
-      </div>
+      {showPages && (
+        <div>
+          <button disabled={currentPage === 1} onClick={handlePrevPage}>
+            Previous
+          </button>
+          <span>Page {currentPage}</span>
+          <button disabled={currentPage === 2} onClick={handleNextPage}>
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };
