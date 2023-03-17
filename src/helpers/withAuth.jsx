@@ -1,12 +1,14 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import parseJwt from './parserJwt';
 
 const isExpiredJWT = (token) => {
   try {
     const decodedJWT = parseJwt(token)
+    const dateNow = new Date()
     const miliseconds = dateNow.getTime() / 1000
 
-    console.log(decodedJWT);
+    console.log(decodedJWT.exp);
     if(decodedJWT.exp < miliseconds){
       return true
     } else {
