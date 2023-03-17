@@ -11,37 +11,17 @@ const LoginPage = () => {
   const handleLogin = async () => {
     const loginPayload = { username, password }
     axios.post("http://localhost:5000/api/login", loginPayload)
-     .then(response => {
-      console.log(response.data);
-       //get token from response
-       const token  =  response.data.token;
- 
-       //set JWT token to local
-       localStorage.setItem("token", token);
- 
-       //set token to axios common header
-      //  setAuthToken(token);
-      navigate('/');
- 
-//redirect user to home page
-      //  window.location.href = '/'
-     })
-     .catch(err => console.log(err));
-    // try {
-    //   const response = await fetch('http://localhost:5000/api/login', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ username, password }),
-    //   });
+      .then(response => {
+        console.log(response.data);
+        //get token from response
+        const token = response.data.token;
 
-    //   const { token } = await response.json();
-    //   localStorage.setItem('token', token);
-    //   navigate('/');
-    // } catch (error) {
-    //   console.error(error);
-    // }
+        //set JWT token to local
+        localStorage.setItem("token", token);
+
+        navigate('/');
+      })
+      .catch(err => console.log(err));
   };
 
   return (

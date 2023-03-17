@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Home from './pages/Home';
 import LoginPage from './pages/Login';
+import parseJwt from './helpers/parserJwt';
 
 const router = createBrowserRouter([
   {
@@ -21,10 +22,19 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const [count, setCount] = useState(0)
+  const token = localStorage.getItem('token');
+  const decodedToken = parseJwt(token);
+  const { username } = decodedToken;
 
   return (
-    <RouterProvider router={router} />
+    <>
+      <header>
+        <p>{username}</p>
+      </header>
+      <main>
+        <RouterProvider router={router} />
+      </main>
+    </>
   )
 }
 
