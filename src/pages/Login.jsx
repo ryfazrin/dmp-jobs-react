@@ -25,17 +25,19 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
+    <div className="row">
       <h1>Login</h1>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-      </label>
-      <label>
-        Password:
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      </label>
-      <button onClick={handleLogin}>Login</button>
+      <div className="col-12">
+        <label className="form-label">Username</label>
+        <input type="text" className="form-control" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+      </div>
+      <div className="col-12">
+        <label className="form-label">Password</label>
+        <input type="password" className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      </div>
+      <div className="col-12 mt-2">
+        <button onClick={handleLogin} className="btn btn-primary">Sign in</button>
+      </div>
     </div>
   );
 };
