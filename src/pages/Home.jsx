@@ -68,7 +68,7 @@ const Home = () => {
   return (
     <div>
       <div className='row'>
-        <h1>Search</h1>
+        <h2>Search</h2>
         <div className="col-3">
           <label className="form-label">Job Description</label>
           <input type="text" className="form-control" placeholder="Job Desc" value={description} onChange={(e) => setDescription(e.target.value)} />
