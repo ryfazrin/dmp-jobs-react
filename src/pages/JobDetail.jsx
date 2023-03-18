@@ -34,9 +34,9 @@ const JobDetail = () => {
       <div>
         <span>{job.type}</span>/<span>{job.location}</span>
       </div>
-      <p>{job.title}</p>
+      <p><b>{job.title}</b></p>
 
-      <div>{job.description}</div>
+      <div dangerouslySetInnerHTML={{__html: job.description }} />
       <a href={job.company_url}>{job.company}</a>
       <img src={job.company_logo} />
     </div>

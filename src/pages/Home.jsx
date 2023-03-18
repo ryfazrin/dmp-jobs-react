@@ -67,21 +67,27 @@ const Home = () => {
 
   return (
     <div>
-      <div>
+      <div className='row'>
         <h1>Search</h1>
-        <label>
-          Job Description:
-          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
-        </label>
-        <label>
-          Location:
-          <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
-        </label>
-        <label>
-          <input type="checkbox" value={fullTime} onChange={(e) => setFullTime(e.target.value)} />
-          full Time
-        </label>
-        <button onClick={handleSearch}>Search</button>
+        <div className="col-3">
+          <label className="form-label">Job Description</label>
+          <input type="text" className="form-control" placeholder="Job Desc" value={description} onChange={(e) => setDescription(e.target.value)} />
+        </div>
+        <div className="col-3">
+          <label className="form-label">Location</label>
+          <input type="text" className="form-control" placeholder="Location" value={location} onChange={(e) => setLocation(e.target.value)} />
+        </div>
+        <div class="col-3 d-flex align-items-end">
+          <div class="form-check">
+          <input type="checkbox" className="form-check-input" value={fullTime} onClick={(e) => setFullTime(!fullTime)} />
+              <label class="form-check-label" for="gridCheck">
+                Full Time Only
+              </label>
+          </div>
+        </div>
+        <div className="col-3 d-flex align-items-end">
+          <button onClick={handleSearch} className="btn btn-primary">Search</button>
+        </div>
       </div>
       <h1>Home</h1>
       {jobs.map((job, i) => {
@@ -101,12 +107,12 @@ const Home = () => {
       })
       }
       {showPages && (
-        <div>
-          <button disabled={currentPage === 1} onClick={handlePrevPage}>
+        <div class="btn-group">
+          <button class="btn btn-primary" disabled={currentPage === 1} onClick={handlePrevPage}>
             Previous
           </button>
-          <span>Page {currentPage}</span>
-          <button disabled={currentPage === 2} onClick={handleNextPage}>
+          <span class="btn btn-outline-primary">Page {currentPage}</span>
+          <button class="btn btn-primary" disabled={currentPage === 2} onClick={handleNextPage}>
             Next
           </button>
         </div>

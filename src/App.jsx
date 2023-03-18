@@ -36,7 +36,7 @@ function App() {
       <header>
         <p>Logged: {username}</p>
       </header>
-      <main className='container'>
+      <main className='container-fluid'>
         <RouterProvider router={router} />
       </main>
     </>
